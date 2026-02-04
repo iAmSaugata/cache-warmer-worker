@@ -3,16 +3,16 @@
  * ====================================================
  * * 🛠️ SETUP INSTRUCTIONS:
  * 1. WORKER: Create a Worker in Cloudflare Dashboard.
- * 2. ROUTE: Settings -> Triggers -> Add Route -> `technochat.in/cw-trigger*`
+ * 2. ROUTE: Settings -> Triggers -> Add Route -> `yourdomain.com/cw-trigger*`
  * 3. ENV VARS (Settings -> Variables):
  * - Add Variable: `VISUAL_MODE` = "true" (or "false")
  * - Add Secret:   `API_KEY` = "YourSuperSecretKeyHere"
  * 4. CONFIG: Update the sitemaps section below.
  * * 🎮 MODES:
- * 1. AUTO (Browser):   https://technochat.in/cw-trigger?mode=warm&offset=0
- * 2. DEBUG (Browser):  https://technochat.in/cw-trigger?mode=debug&offset=0
- * 3. API (Automation): https://technochat.in/cw-trigger?mode=api&offset=0&key=YOUR_SECRET
- * 4. TEST (Health):    https://technochat.in/cw-trigger?mode=test&key=YOUR_SECRET
+ * 1. AUTO (Browser):   https://yourdomain.com/cw-trigger?mode=warm&offset=0
+ * 2. DEBUG (Browser):  https://yourdomain.com/cw-trigger?mode=debug&offset=0
+ * 3. API (Automation): https://yourdomain.com/cw-trigger?mode=api&offset=0&key=YOUR_SECRET
+ * 4. TEST (Health):    https://yourdomain.com/cw-trigger?mode=test&key=YOUR_SECRET
  * ==================================================
  */
 
@@ -32,21 +32,21 @@ const CONFIG = {
 
   // 📋 SITEMAPS FOR API / AUTOMATION
   SITEMAPS_API: [
-    "https://technochat.in/sitemap-posttype-post.xml",
-    "https://technochat.in/sitemap-taxonomy-category.xml",
-    "https://technochat.in/sitemap-posttype-page.xml"
+    "https://yourdomain.com/sitemap-posttype-post.xml",
+    "https://yourdomain.com/sitemap-taxonomy-category.xml",
+    "https://yourdomain.com/sitemap-posttype-page.xml"
   ],
 
   // 📋 SITEMAPS FOR BROWSER (VISUAL) MODE
   // (Can be the same as API, or a larger list if you prefer)
   SITEMAPS_VISUAL: [
-    "https://technochat.in/sitemap.xml"
+    "https://yourdomain.com/sitemap.xml"
   ],
 
   BATCH_SIZE: 40,
   VERIFY_SIZE: 40,
   DELAY_MS: 50,
-  WORKER_ROUTE: "https://technochat.in/cw-trigger", // Must match your Cloudflare Route
+  WORKER_ROUTE: "https://yourdomain.com/cw-trigger", // Must match your Cloudflare Route
 
   // ⬇️ Loaded from ENV (API_KEY: Secret)
   API_SECRET: ""
@@ -441,7 +441,7 @@ async function processBatch(urls) {
         }
 
         results.push({
-          url: u.replace("https://technochat.in", ""),
+          url: u.replace("https://yourdomain.com", ""),
           status: res.status,
           cf: cfStatus,
           size: size,
@@ -490,7 +490,7 @@ async function runVerification(allUrls, totalBytes, totalTime) {
         if (cf === "HIT") hitCount++;
 
         const time = Date.now() - start;
-        const cleanUrl = u.replace("https://technochat.in", "");
+        const cleanUrl = u.replace("https://yourdomain.com", "");
         const icon = cf === "HIT" ? "💚" : "⚠️";
 
         let cssClass = "miss";
